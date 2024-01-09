@@ -67,6 +67,7 @@ while True:
         mask = cv2.line(mask, (a,b),(c,d), (0,0,255), 2)
         frame = cv2.circle(frame,(a,b),5,color[i].tolist(),-1)
     img_optical = cv2.add(frame,mask)
+    img_optical = cv2.cvtColor(img_optical, cv2.COLOR_BGR2RGB)
     f3.image(img_optical, caption='Optical flow',width=450)
 
     # Now update the previous frame and previous points
