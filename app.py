@@ -5,8 +5,9 @@ import numpy as np
 st.title('Optical flow demo')
 default_threshold = 141
 default_pix = 4;
-threshold  = st.slider("Contour: threshold", 0, 255, default_threshold)
-pix = st.slider("Contour: pixel to calculate average", 1, 20, default_pix)
+
+threshold  = st.sidebar.slider("Contour: threshold", 0, 255, default_threshold)
+pix = st.sidebar.slider("Contour: pixel to calculate average", 1, 20, default_pix)
 f1 = st.empty()
 f2 = st.empty()
 f3 = st.empty()
