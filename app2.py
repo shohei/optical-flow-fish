@@ -3,6 +3,7 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
+import tempfile
 
 st.title('Optical flow demo')
 default_threshold = 141
@@ -30,6 +31,9 @@ lk_params = dict( winSize  = (15,15),
                   criteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 0.03))
 # Create some random colors
 color = np.random.randint(0,255,(100,3))
+
+tmpfile_name = tempfile.NamedTemporaryFile().name+'fig1.png'
+print(tmpfile_name)
 
 cap = cv2.VideoCapture("fish2.mp4")
 _, init_frame = cap.read()
@@ -72,16 +76,13 @@ while True:
 
         average_flow_array.append(average_flow)
         fig, ax = plt.subplots(figsize=(5,2.5))
-        # fig, ax = plt.subplots()
         plt.title('Average flow')
         plt.xlabel('Frame')
         plt.ylabel('Average flow (pixel/frame)')
         ax.plot(average_flow_array)
 
-        fig_filename = 'fig1.png'
-        fig.savefig(fig_filename)
-        fig_image = Image.open(fig_filename)
-        # f5.pyplot(fig)
+        fig.savefig(tmpfile_name)
+        fig_image = Image.open(tmpfile_name)
         f5.image(fig_image)
 
         prvs = next
